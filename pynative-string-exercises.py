@@ -1,4 +1,4 @@
-import re
+import re, string
 
 def mid_of_odd_string():
     s = input('Input: ')
@@ -102,6 +102,80 @@ def digit_sum_avg_regex():
     print('Sum: ' + str(sum))
     print('Average: {:.2f}'.format(avg))
 
+def chars_occurences():
+    s = input('Input: ')
+    res = {}
+    for x in s:
+        res[x] = s.count(x)
+    
+    print('Output: ', end='')
+    print(res)
+
+def rev_str():
+    s = input('Input: ')
+
+    res = [char for char in s]
+    res.reverse()
+    res = ''.join(res)
+    print('Output: ' + res)
+
+def last_pos():
+    haystack = input('Input: ')
+    needle = input('Search: ')
+
+    x = haystack.rfind(needle)
+    print('Output: ' + str(x))
+
+def str_split():
+    s = input('Input: ')
+    sep = input('Separator: ')
+
+    res = s.split('-')
+    print('Output: ', end=' ')
+    print(res)
+
+def remove_empty_str():
+    req_inp = []
+    for i in range(6):
+        inp = input('Input: ')
+        req_inp.append(inp)
+
+    res = [char for char in req_inp if char != ""]
+    print('Output: ', end=' ')
+    print(res)
+
+def remove_punctuation():
+    s = input("Input: ")
+
+    mytrans = s.maketrans(' ', ' ', string.punctuation)
+    res = s.translate(mytrans)
+    print('Output: ' + res)
+
+def remove_all_ints():
+    s = input('Input: ')
+    s = s.split(' ')
+    res = ''
+
+    for x in s:
+        if x.isdecimal():
+            res += x
+    
+    print('Output: ' + res)
+
+def find_alphanum_words():
+    s = input('Input: ')
+
+    res = re.findall("([a-zA-Z]+[0-9]+|[0-9]+[a-zA-Z]+)[a-zA-Z0-9]*", s)
+    print(res)
+        
+def replace_punctuation():
+    s = input('Input: ')
+
+    for term in string.punctuation:
+        s = s.replace(term, '#')
+
+    print('Output: ' + s)
+
 # Problems map is a dictionary mapping the serial number with its solver function.
 
 problems = {
@@ -113,7 +187,16 @@ problems = {
     '6': mix_strings,
     '7': string_balance_test,
     '8': string_occurences,
-    '9': digit_sum_avg_regex
+    '9': digit_sum_avg_regex,
+    '10': chars_occurences,
+    '11': rev_str,
+    '12': last_pos,
+    '13': str_split,
+    '14': remove_empty_str,
+    '15': remove_punctuation,
+    '16': remove_all_ints,
+    '17': find_alphanum_words,
+    '18': replace_punctuation
 }
 
 # main() is the root function from where the other functions are called
