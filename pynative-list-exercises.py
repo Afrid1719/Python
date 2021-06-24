@@ -51,6 +51,30 @@ def add_item_inside():
     list1[2][2].append(7000)
     print(list1)
 
+def extend_in_between():
+    list1 = ["a", "b", ["c", ["d", "e", ["f", "g"], "k"], "l"], "m", "n"]
+    ext = ["h", "i", "j"]
+
+    list1[2][1][2].extend(ext)
+
+    print('Output: ' + str(list1))
+
+def replace_first_match():
+    list1 = [5, 10, 15, 20, 25, 50, 20]
+    pos = list1.index(20)
+    list1.pop(pos)
+    list1.insert(pos, 200)
+
+    print('Output: ' + str(list1))
+
+def remove_all_matches():
+    list1 = [5, 20, 15, 20, 25, 50, 20]
+    
+    while list1.count(20) > 0:
+        list1.remove(20)
+
+    print('Output: ' + str(list1))
+
 # Problems map is a dictionary mapping the serial number with its solver function.
 
 problems = {
@@ -60,7 +84,10 @@ problems = {
     '4': concat_list_in_patt1,
     '5': iterate_simultaneously,
     '6': remove_empty_str,
-    '7': add_item_inside
+    '7': add_item_inside,
+    '8': extend_in_between,
+    '9': replace_first_match,
+    '10': remove_all_matches
 }
 
 # main() is the root function from where the other functions are called
