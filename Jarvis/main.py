@@ -1,6 +1,7 @@
 import pyttsx3
 import datetime
 import speech_recognition as sr
+import webbrowser as browser
 
 
 engine = pyttsx3.init("sapi5")
@@ -10,21 +11,26 @@ engine.setProperty("voice", voices[0].id)
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-        print('Listening... ')
+        print('Adjusting from background noise...')
         r.pause_threshold = 1
+        r.adjust_for_ambient_noise(source)
+        print('Listening... ')
         audio = r.listen(source)
 
-    try:
-        print('Recognizing... ')
-        query = r.recognize_google(audio, language='en-in')
-        print(f"Jarvis thinks you said: {query}")
-        speak(query)
-    except Exception as e:
-        print(e)
-        speak("Pardon, can you please repeat")
-        print("Pardon, can you please repeat")
-        return "None"
-    return query
+    while True:
+        try:
+            print('Recognizing... ')
+            query = r.recognize_google(audio, language='en-in')
+            print(f"Your command: {query}")
+            print(query.find('Jarvis go to sleep'))
+            if query.find('Jarvis go to sleep') != -1:
+                break
+            
+            exec_command(query)
+        except Exception as e:
+            print(e)
+            speak("Pardon, can you please repeat")
+            print("Pardon, can you please repeat")
 
 def speak(speech):
     engine.say(speech)
@@ -45,6 +51,10 @@ def wishMe():
         return
     
     speak('What can I do for you, sir?')
+
+def exec_command(query):
+    if query.find('open the browser') != -1:
+        browser.open('https://www.google.com')
 
 if __name__ == '__main__':
     wishMe()
